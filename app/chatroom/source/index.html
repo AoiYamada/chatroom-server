@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
+  <script>
+    const socket = io("ws://localhost:3000");
+    socket.on("connect", () => {
+      console.log("Connected");
+    });
+    socket.on("init", all_chats => {
+      for (const { username, msg } of all_chats) {
+        console.log(`${username}: ${msg}`)
+      }
+      socket.on("broadcast", ({ username, msg }) => console.log(`${username}: ${msg}`));
+    });
+
+    function broadcast() {
+      const msg = document.forms["chat"]["msg"].value;
+      socket.emit("broadcast", msg);
+      document.forms["chat"]["msg"].value = "";
+      return false;
+    }
+  </script>
+  <title>Chatroom</title>
+</head>
+
+<body>
+  <form name="chat" onsubmit="return broadcast()">
+    Message: <input type="text" name="msg" />
+    <input type="submit" value="Submit" />
+  </form>
+
+  <form action="/logout" method="post">
+    <div>
+      <input type="submit" value="Log out" />
+    </div>
+  </form>
+</body>
+
+</html>
