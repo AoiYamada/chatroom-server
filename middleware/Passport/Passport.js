@@ -26,7 +26,7 @@ module.exports = passport => {
         if (!user) {
           return done(null, false, { message: "Incorrect username." });
         }
-        if (!Encryption.verify(password, user.password)) {
+        if (!await Encryption.verify(password, user.password)) {
           return done(null, false, { message: "Incorrect password." });
         }
         return done(null, {

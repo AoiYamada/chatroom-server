@@ -9,6 +9,7 @@ const APP = path.join(CWD, "app");
 const LIB = path.join(CWD, "lib");
 const MODEL = path.join(CWD, "model");
 const MODULE = path.join(CWD, "module");
+const STATIC = path.join(CWD, 'static');
 const MIDDLEWARE = path.join(CWD, "middleware");
 
 module.exports = {
@@ -22,6 +23,7 @@ module.exports = {
     LIB,
     MODEL,
     MODULE,
+    STATIC,
     MIDDLEWARE,
   },
   DB: {
