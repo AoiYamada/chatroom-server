@@ -1,0 +1,22 @@
+body{
+    
+}
+
+#card-wrapper{
+    height:90vh;
+    max-width: 900px;
+    margin: auto;
+}
+
+#text-form-wrapper{
+    border: 1px solid #000;
+    position: absolute;
+    bottom: 0px;
+    z-index: 10;
+    width: 100%;
+    margin: 0px;
+}
+
+.page-content-wrapper{
+    padding: 25px 10px;
+}
