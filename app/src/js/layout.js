@@ -7,6 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-$( document ).ready(function(){
-    $(".dropdown-trigger").dropdown();
-})
+// $( document ).ready(function(){
+//     $(".dropdown-trigger").dropdown();
+// })

@@ -8,9 +8,14 @@ body{
     margin: auto;
 }
 
+#card-content{
+    height: 100%;
+    overflow-y: auto;
+}
+
 #text-form-wrapper{
-    border: 1px solid #000;
-    position: absolute;
+    /* border: 1px solid #000; */
+    /* position: absolute; */
     bottom: 0px;
     z-index: 10;
     width: 100%;

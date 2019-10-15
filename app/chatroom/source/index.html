@@ -28,9 +28,18 @@
       const socket = io("wss://yamada.jacen.dev");
       const image_format_reg = /^\[img\]\((.*?)\)$/;
 
+
+      /** append message function **/
+      function appendMsg(username,msg){
+        $("#card-content").append(
+          "<div class='dialog'><blockquote>"+username+" "+msg+"</<blockquote></div>"
+        )
+      }
+
       socket.on("connect", () => {
         console.log("Connected");
       });
+      
       socket.on("init", all_chats => {
         for (const { username, msg } of all_chats) {
           const image_match = msg.match(image_format_reg);
@@ -39,6 +48,7 @@
             console.image(image_match[1]);
           } else {
             console.log(`${username}: ${msg}`);
+            appendMsg(username,msg);
           }
         }
         socket.on("broadcast", ({ username, msg }) => {
@@ -46,8 +56,10 @@
           if (image_match) {
             console.log(`${username}:`);
             console.image(image_match[1]);
+            appendMsg(username,msg);
           } else {
             console.log(`${username}: ${msg}`);
+            appendMsg(username,msg);
           }
         });
       });
@@ -114,11 +126,13 @@
               -->
               <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
             </div>
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+            <div class="card-content" id="card-content">
+              <p>Welcome to the chat room!</p>
+              <div class="dialog">
+              </div>
             </div>
 
-            <div class="row s12 m12 l12" id="text-form-wrapper">
+            <div class="row s12 m12 l12 z-depth-2" id="text-form-wrapper">
               <form name="chat" onsubmit="return broadcast()">
                 <div class="col s12">
                   <div class="">
@@ -148,7 +162,7 @@
 
                     <!-- submit button -->
                     <div class="col s2 m2">
-                      <div class="input-field col s12">
+                      <div class="input-field col s12 right-align">
                         <button class="btn waves-effect waves-light" type="submit" name="action">Send
                         </button>
                       </div>
