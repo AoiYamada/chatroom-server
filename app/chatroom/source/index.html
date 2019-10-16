@@ -15,12 +15,14 @@
     <!-- <link href="/static/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"> -->
     <link href="/static/css/styles.css" rel="stylesheet">
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
     <script src="/static/js/smooth-scrollbar.js"></script>
     <script src="/static/js/index.js"></script>
     <script>
@@ -102,37 +104,42 @@
   </head>
 
   <body>
-    <!-- Dropdown Structure -->
-    <!--
-    <ul id="dropdown1" class="dropdown-content">
-      <li><a href="#!">one</a></li>
-      <li><a href="#!">two</a></li>
-      <li class="divider"></li>
-      <li><a href="#!">three</a></li>
+    <!-- side menu -->
+    <ul id="slide-out" class="sidenav">
+      <li><div class="user-view">
+        <div class="background" id="side-bg">
+        </div>
+        <a href="#user"><img class="circle" src="/static/images/cat.jpg"></a>
+        <a href="#name"><span class="white-text name">Pan Kong</span></a>
+        <a href="#email"><span class="white-text email">山田哥@gmail.com</span></a>
+      </div></li>
+      <li><a href="/register">Register</a></li>
+      <li><div class="divider"></div></li>
+      <li><a class="subheader">Others</a></li>
+      <li><a class="waves-effect" href="/logout">Logout</a></li>
     </ul>
-    -->
+    <!-- /side menu -->
+
     <nav>
       <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">Chat-Room</a>
+        <a href="#!" class="brand-logo">Chat-Room <img src="/static/images/cat2.png" id="nav-img"/></a>
         <ul class="right hide-on-med-and-down">
-          <li><a href="https://yamada.jacen.dev/register">Register</a></li>
+          <li><a href="/register">Register</a></li>
           <li><a href="#" id="logout-btn">Logout</a></li>
-          <!-- Dropdown Trigger -->
-          <!--
-          <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
-          -->
         </ul>
+        <a href="#" data-target="slide-out" class="sidenav-trigger" id="side-bar">
+          <i class="material-icons">menu</i>
+        </a>
       </div>
     </nav>
-    
-    <!-- Dropdown Structure -->
+
     <div class="page-content-wrapper">
       <div class="row">
         <div class="col s12 m12 l12">
           <div class="card" id="card-wrapper">
             <div class="card-image">
               <!--
-              <img src="../../../static/images/title-img.jpeg">
+              <img src="/static/images/cat2.png">
               -->
               <!--
               <span class="card-title">Card Title</span>
@@ -150,7 +157,7 @@
                 <div class="col s12">
                   <div class="">
                     <!-- message field -->
-                    <div class="col s7 m7">
+                    <div class="col s12 m7">
                       <div class="input-field col s12">
                         <i class="material-icons prefix">textsms</i>
                         <input type="text" name="msg" id="autocomplete-input" class="autocomplete">
@@ -159,11 +166,11 @@
                     </div>
                     
                     <!-- upload file field -->
-                    <div class="col s3 m3">
+                    <div class="col s9 m3">
                       <div class="input-field col s12">
                         <div class="file-field">
                           <div class="btn">
-                            <span>File</span>
+                            <i class="material-icons">attach_file</i>
                             <input type="file" name="img" id="img">
                           </div>
                           <div class="file-path-wrapper">
@@ -174,7 +181,7 @@
                     </div>
 
                     <!-- submit button -->
-                    <div class="col s2 m2">
+                    <div class="col s3 m2">
                       <div class="input-field col s12 right-align">
                         <button class="btn waves-effect waves-light" type="submit" name="action">Send
                         </button>

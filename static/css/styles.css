@@ -31,3 +31,28 @@ body{
 .page-content-wrapper{
     padding: 25px 10px;
 }
+
+#side-bar{
+    display:none;
+}
+
+nav .brand-logo{
+    padding:0px 10px;
+}
+
+#nav-img{
+    width: 60px;
+    height: 60px;
+    vertical-align: top;
+}
+
+#side-bg{
+    background:#009688;
+}
+
+@media(max-width:992px){
+    #side-bar{
+        display:block;
+    }
+    
+}

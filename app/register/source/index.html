@@ -17,28 +17,47 @@
     <!-- <link href="../../src/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"> -->
     <link href="/static/css/styles.css" rel="stylesheet">
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
     <script src="/static/js/index.js"></script>
     <title>Register</title>
   </head>
 
   <body>
+    <!-- side menu -->
+    <ul id="slide-out" class="sidenav">
+      <li><div class="user-view">
+        <div class="background" id="side-bg">
+        </div>
+        <a href="#user"><img class="circle" src="/static/images/cat.jpg"></a>
+        <a href="#name"><span class="white-text name">Pan Kong</span></a>
+        <a href="#email"><span class="white-text email">山田哥@gmail.com</span></a>
+      </div></li>
+      <li><a href="/login">Login</a></li>
+      <li><a href="/register">Register</a></li>
+    </ul>
+    <!-- /side menu -->
+
     <nav>
       <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">Chat-Room</a>
+        <a href="#!" class="brand-logo">Chat-Room <img src="/static/images/cat2.png" id="nav-img"/></a>
         <ul class="right hide-on-med-and-down">
-          <li><a href="https://yamada.jacen.dev/register">Register</a></li>
-          <li><a href="https://yamada.jacen.dev/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
+          <li><a href="/login">Login</a></li>
           <!-- Dropdown Trigger -->
           <!--
           <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
           -->
         </ul>
+        <a href="#" data-target="slide-out" class="sidenav-trigger" id="side-bar">
+          <i class="material-icons">menu</i>
+        </a>
       </div>
     </nav>
     

@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+$(document).ready(function(){
+    $('.sidenav').sidenav();
+    // var instance = M.Sidenav.getInstance($('.sidenav'));
+    // instance.open();
+});
+
 (function($){
     $(window).on("load",function(){
         // var Scrollbar = window.Scrollbar;
