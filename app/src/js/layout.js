@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// $( document ).ready(function(){
-//     $(".dropdown-trigger").dropdown();
-// })
+(function($){
+    $(window).on("load",function(){
+        // var Scrollbar = window.Scrollbar;
+        // Scrollbar.initAll();
+        // Scrollbar.init(document.querySelector('#card-content'));
+    });
+})(jQuery);
