@@ -31,7 +31,11 @@
 
 
       /** append message function **/
-      function appendMsg(username,msg){
+      function appendMsg(username,msg,isImage){
+        if(isImage){
+          msg = "<image src='"+msg+"' class='chat-image'/>";
+        }
+
         $("#card-content").append(
           "<div class='dialog'><blockquote>"+username+" "+msg+"</<blockquote></div>"
         )
@@ -55,6 +59,7 @@
           if (image_match) {
             console.log(`${username}:`);
             console.image(image_match[1]);
+            appendMsg(username,image_match[1],true);
           } else {
             console.log(`${username}: ${msg}`);
             appendMsg(username,msg);
@@ -65,7 +70,7 @@
           if (image_match) {
             console.log(`${username}:`);
             console.image(image_match[1]);
-            appendMsg(username,msg);
+            appendMsg(username,image_match[1],true);
           } else {
             console.log(`${username}: ${msg}`);
             appendMsg(username,msg);
@@ -112,8 +117,8 @@
       <div class="nav-wrapper">
         <a href="#!" class="brand-logo">Chat-Room</a>
         <ul class="right hide-on-med-and-down">
-          <li><a href="index.html">Register</a></li>
-          <li><a href="index.html">Logout</a></li>
+          <li><a href="https://yamada.jacen.dev/register">Register</a></li>
+          <li><a href="#" id="logout-btn">Logout</a></li>
           <!-- Dropdown Trigger -->
           <!--
           <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>

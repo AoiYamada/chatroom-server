@@ -12,5 +12,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // var Scrollbar = window.Scrollbar;
         // Scrollbar.initAll();
         // Scrollbar.init(document.querySelector('#card-content'));
+    
+        $("#logout-btn").click(function(e){
+            e.preventDefault();
+            alert("logout")
+        });
     });
 })(jQuery);

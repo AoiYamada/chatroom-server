@@ -8,6 +8,12 @@ body{
     margin: auto;
 }
 
+#register-form-wrapper{
+    max-width:600px;
+    padding:15px;
+    margin:auto;
+}
+
 #card-content{
     height: 100%;
     overflow-y: auto;
