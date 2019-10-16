@@ -25,7 +25,7 @@ module.exports = [
 
     const reader = fs.createReadStream(file.path);
 
-    const static_path = `/images/${Uuid()}.${Mime.mime2ext(file.type)}`;
+    const static_path = `/images/upload/${Uuid()}.${Mime.mime2ext(file.type)}`;
 
     try {
       const upStream = fs.createWriteStream(path.join(STATIC, static_path));
