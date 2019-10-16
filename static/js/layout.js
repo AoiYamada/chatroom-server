@@ -13,6 +13,12 @@ $(document).ready(function(){
     // instance.open();
 });
 
+function scrollToBot(){
+    var dialogWrapper = $('#card-content');
+    var height = dialogWrapper[0].scrollHeight;
+    dialogWrapper.scrollTop(height);
+}
+
 (function($){
     $(window).on("load",function(){
         // var Scrollbar = window.Scrollbar;
@@ -23,5 +29,7 @@ $(document).ready(function(){
             e.preventDefault();
             alert("logout")
         });
+
+        scrollToBot();
     });
 })(jQuery);

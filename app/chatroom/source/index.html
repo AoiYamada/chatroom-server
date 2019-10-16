@@ -19,7 +19,7 @@
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
-
+    <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     
@@ -31,17 +31,17 @@
 
 
       /** append message function **/
-      function appendMsg(username,msg,isImage){
+      function appendMsg(username,msg,time,isImage){
+        var chat_time = moment(time).calendar();
         if(isImage){
           msg = "<image src='"+msg+"' class='chat-image'/>";
         }
 
-        $("#card-content").prepend(
-          "<div class='dialog'><blockquote>"+username+" "+msg+"</<blockquote></div>"
+        $("#card-content").append(
+          "<div class='dialog'><blockquote>"+username+" "+msg+"</<blockquote><span class='chat_time'>"+chat_time+"</span></div>"
         )
 
-
-        var scrollPos = $("#card-content").position().top;
+        scrollToBot();
         /**
         $('#card-content').animate({
             scrollTop: $("#card-content").offset().top
@@ -54,26 +54,28 @@
       });
       
       socket.on("init", all_chats => {
-        for (const { username, msg } of all_chats) {
+        for (const { username, msg,time } of all_chats) {
           const image_match = msg.match(image_format_reg);
+          //console.log(all_chats,"data")
+
           if (image_match) {
             console.log(`${username}:`);
             console.image(image_match[1]);
-            appendMsg(username,image_match[1],true);
+            appendMsg(username,image_match[1],time,true);
           } else {
             console.log(`${username}: ${msg}`);
-            appendMsg(username,msg);
+            appendMsg(username,msg,time);
           }
         }
-        socket.on("broadcast", ({ username, msg }) => {
+        socket.on("broadcast", ({ username, msg,time }) => {
           const image_match = msg.match(image_format_reg);
           if (image_match) {
             console.log(`${username}:`);
             console.image(image_match[1]);
-            appendMsg(username,image_match[1],true);
+            appendMsg(username,image_match[1],time,true);
           } else {
             console.log(`${username}: ${msg}`);
-            appendMsg(username,msg);
+            appendMsg(username,msg,time);
           }
         });
       });

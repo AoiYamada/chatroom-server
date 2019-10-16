@@ -19,6 +19,10 @@ body{
     overflow-y: auto;
 }
 
+.chat_time{
+    float:right;
+}
+
 #text-form-wrapper{
     /* border: 1px solid #000; */
     /* position: absolute; */
