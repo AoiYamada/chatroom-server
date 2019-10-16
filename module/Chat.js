@@ -19,11 +19,11 @@ io.on("connection", async (socket) => {
   socket.emit("init", all_chat);
 
   socket.on("broadcast", async msg => {
-    const chat = {
+    let chat = {
       ...user,
       msg,
     }
-    await Chat.create(chat);
+    chat = await Chat.create(chat);
     io.emit("broadcast", chat);
   });
 
