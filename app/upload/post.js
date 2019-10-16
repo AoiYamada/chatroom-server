@@ -4,6 +4,7 @@ const {
   PATHS: { LIB, MODEL, STATIC, MIDDLEWARE },
 } = require("config");
 const {
+  HOST,
   Redis: { Chat },
 } = require(MODEL);
 const {
@@ -35,7 +36,7 @@ module.exports = [
     }
 
     const user = ctx.session.passport.user;
-    const img_url = `[img](https://yamada.jacen.dev/static${static_path})`;
+    const img_url = `[img](${HOST}/static${static_path})`;
 
     const chat = {
       ...user,
