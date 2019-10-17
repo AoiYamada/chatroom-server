@@ -8,38 +8,31 @@
     <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
 
     <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
     <!-- <link href="/static/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"> -->
-    <link href="/static/css/styles.css" rel="stylesheet">
+    <link href="/static/css/styles.css" rel="stylesheet" />
 
-    <script
-    src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    
+
     <script src="/static/js/smooth-scrollbar.js"></script>
-    <script src="/static/js/index.js"></script>
     <script>
-      const socket = io("wss://yamada.jacen.dev");
+      const socket = io();
       const image_format_reg = /^\[img\]\((.*?)\)$/;
 
-
       /** append message function **/
-      function appendMsg(username,msg,time,isImage){
+      function appendMsg(username, msg, time, isImage) {
         var chat_time = moment(time).calendar();
-        if(isImage){
-          msg = "<image src='"+msg+"' class='chat-image'/>";
+        if (isImage) {
+          msg = "<image src='" + msg + "' class='chat-image'/>";
         }
 
-        $("#card-content").append(
-          "<div class='dialog'><blockquote>"+username+" "+msg+"</<blockquote><span class='chat_time'>"+chat_time+"</span></div>"
-        )
+        $("#card-content").append("<div class='dialog'><blockquote>" + username + " " + msg + "</<blockquote><span class='chat_time'>" + chat_time + "</span></div>");
 
         scrollToBot();
         /**
@@ -52,30 +45,24 @@
       socket.on("connect", () => {
         console.log("Connected");
       });
-      
+
       socket.on("init", all_chats => {
-        for (const { username, msg,time } of all_chats) {
+        for (const { username, msg, time } of all_chats) {
           const image_match = msg.match(image_format_reg);
           //console.log(all_chats,"data")
 
           if (image_match) {
-            console.log(`${username}:`);
-            console.image(image_match[1]);
-            appendMsg(username,image_match[1],time,true);
+            appendMsg(username, image_match[1], time, true);
           } else {
-            console.log(`${username}: ${msg}`);
-            appendMsg(username,msg,time);
+            appendMsg(username, msg, time);
           }
         }
-        socket.on("broadcast", ({ username, msg,time }) => {
+        socket.on("broadcast", ({ username, msg, time }) => {
           const image_match = msg.match(image_format_reg);
           if (image_match) {
-            console.log(`${username}:`);
-            console.image(image_match[1]);
-            appendMsg(username,image_match[1],time,true);
+            appendMsg(username, image_match[1], time, true);
           } else {
-            console.log(`${username}: ${msg}`);
-            appendMsg(username,msg,time);
+            appendMsg(username, msg, time);
           }
         });
       });
@@ -84,13 +71,13 @@
         const msg = document.forms["chat"]["msg"].value;
         socket.emit("broadcast", msg);
         document.forms["chat"]["msg"].value = "";
-       
+
         return false;
       }
 
       function upload() {
         var file = document.getElementById("img").files[0];
-        console.log(file)
+        console.log(file);
 
         const formData = new FormData();
         formData.append("img", file);
@@ -108,13 +95,14 @@
   <body>
     <!-- side menu -->
     <ul id="slide-out" class="sidenav">
-      <li><div class="user-view">
-        <div class="background" id="side-bg">
+      <li>
+        <div class="user-view">
+          <div class="background" id="side-bg"></div>
+          <a href="#user"><img class="circle" src="/static/images/cat.png"/></a>
+          <a href="#name"><span class="white-text name">AoiYamada</span></a>
+          <a href="#email"><span class="white-text email">AoiYamada@gmail.com</span></a>
         </div>
-        <a href="#user"><img class="circle" src="/static/images/cat.png"></a>
-        <a href="#name"><span class="white-text name">AoiYamada</span></a>
-        <a href="#email"><span class="white-text email">AoiYamada@gmail.com</span></a>
-      </div></li>
+      </li>
       <li><a href="/register">Register</a></li>
       <li><div class="divider"></div></li>
       <li><a class="subheader">Others</a></li>
@@ -150,8 +138,7 @@
             </div>
             <div class="card-content" id="card-content" data-scrollbar>
               <p>Welcome to the chat room!</p>
-              <div class="dialog">
-              </div>
+              <div class="dialog"></div>
             </div>
 
             <div class="row s12 m12 l12 z-depth-2" id="text-form-wrapper">
@@ -162,21 +149,21 @@
                     <div class="col s12 m7">
                       <div class="input-field col s12">
                         <i class="material-icons prefix">textsms</i>
-                        <input type="text" name="msg" id="autocomplete-input" class="autocomplete">
+                        <input type="text" name="msg" id="autocomplete-input" class="autocomplete" />
                         <label for="autocomplete-input">Message:</label>
                       </div>
                     </div>
-                    
+
                     <!-- upload file field -->
                     <div class="col s9 m3">
                       <div class="input-field col s12">
                         <div class="file-field">
                           <div class="btn">
                             <i class="material-icons">attach_file</i>
-                            <input type="file" name="img" id="img">
+                            <input type="file" name="img" id="img" />
                           </div>
                           <div class="file-path-wrapper">
-                            <input  class="file-path validate" type="text" accept="image/*" onchange="window.upload()" />
+                            <input class="file-path validate" type="text" accept="image/*" onchange="window.upload()" />
                           </div>
                         </div>
                       </div>
@@ -185,8 +172,7 @@
                     <!-- submit button -->
                     <div class="col s3 m2">
                       <div class="input-field col s12 right-align">
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Send
-                        </button>
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Send</button>
                       </div>
                     </div>
 
@@ -196,10 +182,18 @@
                         <i class="large material-icons">mode_edit</i>
                       </a>
                       <ul>
-                        <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-                        <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-                        <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-                        <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+                        <li>
+                          <a class="btn-floating red"><i class="material-icons">insert_chart</i></a>
+                        </li>
+                        <li>
+                          <a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a>
+                        </li>
+                        <li>
+                          <a class="btn-floating green"><i class="material-icons">publish</i></a>
+                        </li>
+                        <li>
+                          <a class="btn-floating blue"><i class="material-icons">attach_file</i></a>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -208,7 +202,7 @@
             </div>
           </div>
         </div>
-      </div> 
+      </div>
     </div>
 
     <!--
