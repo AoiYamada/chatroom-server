@@ -1,10 +1,10 @@
 const path = require("path");
 const fs = require("fs");
 const {
+  HOST,
   PATHS: { LIB, MODEL, STATIC, MIDDLEWARE },
 } = require("config");
 const {
-  HOST,
   Redis: { Chat },
 } = require(MODEL);
 const {
