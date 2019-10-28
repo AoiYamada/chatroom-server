@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const {
+  HOST,
   PATHS: { LIB, MODEL, STATIC, MIDDLEWARE },
 } = require("config");
 const {
@@ -24,7 +25,7 @@ module.exports = [
 
     const reader = fs.createReadStream(file.path);
 
-    const static_path = `/images/${Uuid()}.${Mime.mime2ext(file.type)}`;
+    const static_path = `/images/upload/${Uuid()}.${Mime.mime2ext(file.type)}`;
 
     try {
       const upStream = fs.createWriteStream(path.join(STATIC, static_path));
@@ -35,7 +36,7 @@ module.exports = [
     }
 
     const user = ctx.session.passport.user;
-    const img_url = `[img](https://yamada.jacen.dev/static${static_path})`;
+    const img_url = `[img](${HOST}/static${static_path})`;
 
     const chat = {
       ...user,

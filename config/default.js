@@ -14,6 +14,7 @@ const MIDDLEWARE = path.join(CWD, "middleware");
 
 module.exports = {
   PORT: 3000,
+  HOST: "https://yamada.jacen.dev",
   IS_PROD,
   IS_DEV,
   SECRET,

@@ -90,3 +90,6 @@ typings/
 # Custom
 config/local.js
 package-lock.json
+
+static/images/upload/*
+!**/**/.gitkeep
